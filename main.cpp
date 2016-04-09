@@ -22,29 +22,41 @@ void seleccion(int mat[][4], int colores[4], int tam, bool coloresUsados[], int 
     if (tam == 0) {
         colores[tam] = 0;
         coloresEmpleados++;
-        return;
-    } else {
-        bool adyacentes[4];
-        for (int i = 0; i < 4; i++) {
-            adyacentes[i] = false;
-            if (mat[tam][i] == 1) {
-                adyacentes[i] = true;
+    }
+    for (int i = tam; i < 4; i++) {
+        if (colores[i] == -1) {
+            if (mat[tam][i] == 0) {
+                colores[i] = colores[tam];
+            } else {
+                colores[i] = coloresEmpleados;
+                coloresEmpleados++;
             }
-        }
-        int candidatos[4];
-        int tamCandidatos = 0;
-        for (int i = 0; i < 4; i++) {
-            if (coloresUsados[i] && !adyacentes[i]) {
-                candidatos[tamCandidatos++] = i;
-            }
-        }
-        if (tamCandidatos == 0) {
-            colores[tam] = coloresEmpleados;
-            coloresEmpleados++;
-        } else {
-            colores[tam] = candidatos[0];
         }
     }
+
+
+    //    } else {
+    //        bool adyacentes[4];
+    //        for (int i = 0; i < 4; i++) {
+    //            adyacentes[i] = false;
+    //            if (mat[tam][i] == 1) {
+    //                adyacentes[i] = true;
+    //            }
+    //        }
+    //        int candidatos[4];
+    //        int tamCandidatos = 0;
+    //        for (int i = 0; i < 4; i++) {
+    //            if (coloresUsados[i] && !adyacentes[i]) {
+    //                candidatos[tamCandidatos++] = i;
+    //            }
+    //        }
+    //        if (tamCandidatos == 0) {
+    //            colores[tam] = coloresEmpleados;
+    //            coloresEmpleados++;
+    //        } else {
+    //            colores[tam] = candidatos[0];
+    //        }
+
 }
 
 void voraz(int mat[][4], int colores[4], int tam) {
@@ -58,10 +70,10 @@ void voraz(int mat[][4], int colores[4], int tam) {
 
 int main(int argc, char** argv) {
     int mat[4][4] = {
-        0, 1, 1, 1,
-        1, 0, 1, 1,
-        1, 1, 0, 1,
-        1, 1, 1, 0
+        0, 1, 1, 0,
+        1, 0, 0, 1,
+        1, 0, 0, 1,
+        0, 1, 1, 0
     };
     int tam = 0;
     int colores[4] = {-1, -1, -1, -1};
