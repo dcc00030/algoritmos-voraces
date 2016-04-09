@@ -28,20 +28,20 @@ void seleccion(int mat[][4], int colores[4], int tam, bool coloresUsados[], int 
         for (int i = 0; i < 4; i++) {
             adyacentes[i] = false;
             if (mat[tam][i] == 1) {
-                adyacentes[i]= true;
+                adyacentes[i] = true;
             }
         }
         int candidatos[4];
-        int tamCandidatos =0;
-        for(int i = 0; i < 4; i++){
-            if(coloresUsados[i] && !adyacentes[i]){
-                candidatos[tamCandidatos++]=i;
+        int tamCandidatos = 0;
+        for (int i = 0; i < 4; i++) {
+            if (coloresUsados[i] && !adyacentes[i]) {
+                candidatos[tamCandidatos++] = i;
             }
         }
-        if(tamCandidatos == 0 ){
+        if (tamCandidatos == 0) {
             colores[tam] = coloresEmpleados;
             coloresEmpleados++;
-        }else{
+        } else {
             colores[tam] = candidatos[0];
         }
     }
@@ -49,41 +49,30 @@ void seleccion(int mat[][4], int colores[4], int tam, bool coloresUsados[], int 
 
 void voraz(int mat[][4], int colores[4], int tam) {
     bool coloresUsados[4];
-    int coloresEmpleados =0;
+    int coloresEmpleados = 0;
     while (tam < 4) {
-        seleccion(mat, colores, tam, coloresUsados,coloresEmpleados);
+        seleccion(mat, colores, tam, coloresUsados, coloresEmpleados);
         tam++;
     }
 }
 
 int main(int argc, char** argv) {
-    int opcion = 0;
-    while (opcion != -1) {
-        cout << "Problema1: los ejercitos" << endl;
-        cout << "Problema2: " << endl;
-        cout << "Problema 6: los colores" << endl;
-        cout << "-1 para salir" << endl;
-        cin >> opcion;
-
-        switch (opcion) {
-            case 6:
-                int mat[4][4] = {
-                    0, 1, 1, 1,
-                    1, 0, 1, 1,
-                    1, 1, 0, 1,
-                    1, 1, 1, 0
-                };
-                int tam = 0;
-                int colores[4] = {-1, -1, -1, -1};
-                voraz(mat,colores,tam);
-                for(int i = 0; i < 4; i++){
-                    cout<<colores[i]<<endl;
-                }
-                break;
-        }
+    int mat[4][4] = {
+        0, 1, 1, 1,
+        1, 0, 1, 1,
+        1, 1, 0, 1,
+        1, 1, 1, 0
+    };
+    int tam = 0;
+    int colores[4] = {-1, -1, -1, -1};
+    voraz(mat, colores, tam);
+    for (int i = 0; i < 4; i++) {
+        cout << colores[i] << endl;
     }
-
-
     return 0;
 }
+
+
+
+
 
